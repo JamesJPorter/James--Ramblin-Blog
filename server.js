@@ -12,12 +12,9 @@ const sequelize = require('./config/config');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
-    secret: 'Super secret secret', 
+    secret: process.env.SESSION_SECRET, 
     cookie: {
-        maxAge: 300000, 
-        httpOnly: true, 
-        secure: false, 
-        sameSite: 'strict'
+        maxAge: 24 * 60 * 60 * 1000
     }, 
     resave: false, 
     saveUninitialized: true, 
@@ -36,6 +33,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(routes);
 
 // Setup route middleware
 app.use(require('./controllers'));

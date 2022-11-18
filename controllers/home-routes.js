@@ -17,7 +17,7 @@ router.get('/post/:id', async (req, res) => {
 
 //  TODO: Login 
 router.get('/login', async (req, res) => {
-    res.send('Render login view.')
+    res.render('login')
 });
 
 //  TODO: Signup 
