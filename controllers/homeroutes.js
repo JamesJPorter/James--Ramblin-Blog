@@ -17,7 +17,14 @@ router.get('/post/:id', async (req, res) => {
 
 //  TODO: Login 
 router.get('/login', async (req, res) => {
-    res.render('login')
+    try {
+        if (req.session.logged_in) {
+            res.redirect('/');
+            return;
+          }
+    }catch (err){
+        res.send('login')
+    }
 });
 
 //  TODO: Signup 
