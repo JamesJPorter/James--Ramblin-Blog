@@ -4,7 +4,7 @@ const router = require('express').Router();
 //  TODO: Get All Posts 
 router.get('/', async (req, res) => {
     try {
-        res.render('main')
+        res.render('homepage')
     } catch (err){
         res.status(500).json(err)
     }
