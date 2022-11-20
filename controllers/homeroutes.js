@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const { User } = require('../../models');
+const { User } = require('../models');
 
 //  TODO: Get All Posts 
 router.get('/', async (req, res) => {
@@ -18,12 +18,12 @@ router.get('/post/:id', async (req, res) => {
 //  TODO: Login 
 router.get('/login', async (req, res) => {
     try {
-        if (req.session.logged_in) {
-            res.redirect('/');
-            return;
-          }
+        // if (req.session.logged_in) {
+        //     res.redirect('/');
+        //   }
+        res.render('login')
     }catch (err){
-        res.send('login')
+        res.status(400).json(err)
     }
 });
 

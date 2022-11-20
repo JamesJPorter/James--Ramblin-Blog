@@ -37,7 +37,8 @@ app.use(routes);
 // Setup route middleware
 app.use(require('./controllers'));
 
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}!`);
-    sequelize.sync({ force: false});
+sequelize.sync({ force: false}).then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server listening on ${PORT}`);
+    });
 });
