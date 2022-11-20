@@ -28,8 +28,8 @@ router.get('/login', async (req, res) => {
 });
 
 //  TODO: Signup 
-router.get('/signup', async (req, res) => {
-    res.send('Render signup view.')
+router.get('/register', async (req, res) => {
+    res.render('register');
 });
 
 
