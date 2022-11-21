@@ -6,6 +6,7 @@ router.post('/login', async (req, res) => {
     try {
         // Retrieve user from database based on username 
         const userData = await User.findOne({ where: {username: req.body.username}});
+        console.log('userData', userData)
 
         //Exit if no user is found
         if (!userData){
@@ -14,6 +15,7 @@ router.post('/login', async (req, res) => {
 
         //Check password 
         const pwdValidated = await userData.checkPassword(req.body.password);
+        console.log('pwdValidated', pwdValidated);
         if (!pwdValidated) {
             return res.status(400).json('Invalid credentials');
         }
