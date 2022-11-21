@@ -1,12 +1,22 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Post } = require('../models');
 
 //  TODO: Get All Posts 
 router.get('/', async (req, res) => {
+    console.log('*******', req.session)
     try {
-        res.render('homepage')
-    } catch (err){
-        res.status(500).json(err)
+        //retrieve all posts from db
+        const dbPostData = await Post.findAll({
+            include: [User],
+        });
+
+        //serialize data retrieved
+        const posts = dbPostData.map((post) => post.get({plain: true}));
+
+        //respond with template to render along with data retrieved
+        res.render('homepage');
+    } catch (error) {
+        res.status(500).json(error);
     }
 });
 
@@ -18,11 +28,19 @@ router.get('/post/:id', async (req, res) => {
 //  TODO: Login 
 router.get('/login', async (req, res) => {
     try {
-        // if (req.session.logged_in) {
-        //     res.redirect('/');
-        //   }
+        if (req.session.logged_in) {
+            res.redirect('/');
+          }
         res.render('login')
     }catch (err){
+        res.status(400).json(err)
+    }
+});
+
+router.get('/logout', async (req, res) => {
+    try {
+        
+    } catch (err) {
         res.status(400).json(err)
     }
 });
