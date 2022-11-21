@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         const posts = dbPostData.map((post) => post.get({plain: true}));
 
         //respond with template to render along with data retrieved
-        res.render('homepage');
+        res.render('homepage', {posts, loggedin: req.session.loggedin});
     } catch (error) {
         res.status(500).json(error);
     }
@@ -38,11 +38,15 @@ router.get('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-    try {
-        
-    } catch (err) {
-        res.status(400).json(err)
-    }
+    if (req.session.logged_in) {
+        // Remove the session variables
+        req.session.destroy(() => {
+          res.status(204).end();
+          res.redirect('/');
+        });
+      } else {
+        res.status(404).end();
+      }
 });
 
 //  TODO: Signup 

@@ -18,9 +18,7 @@ const loginFormHandler = async (event) => {
     if (response.ok) {
         document.location.replace('/') // eventually ('/dashboard)
     } else {
-        const message = await response.json();
-        console.log("response message", message)
-        alert(message);
+        alert("Invalid credentials");
     }
 };
  
