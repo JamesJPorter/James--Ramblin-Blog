@@ -3,7 +3,7 @@ const { User, Post } = require('../models');
 
 //  TODO: Get All Posts 
 router.get('/', async (req, res) => {
-    console.log('*******', req.session)
+    // console.log('*******', req.session)
     try {
         //retrieve all posts from db
         const dbPostData = await Post.findAll({
@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
 
         //serialize data retrieved
         const posts = dbPostData.map((post) => post.get({plain: true}));
-
         //respond with template to render along with data retrieved
         res.render('homepage', {posts, loggedin: req.session.loggedin});
     } catch (error) {
@@ -37,7 +36,7 @@ router.get('/login', async (req, res) => {
     }
 });
 
-router.get('/logout', async (req, res) => {
+router.post('/logout', async (req, res) => {
     if (req.session.logged_in) {
         // Remove the session variables
         req.session.destroy(() => {

@@ -1,6 +1,7 @@
 const logout = async () => {
+  console.log('Logout logic')
   // Make a POST request to destroy the session on the back end
-  const response = await fetch('/api/users/logout', {
+  const response = await fetch('/api/user/logout', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });
@@ -9,8 +10,10 @@ const logout = async () => {
     // If successfully logged out, redirect to the login page
     document.location.replace('/login');
   } else {
-    // alert(response.statusText);
+    alert("ERROR");
   }
 };
 
-document.querySelector('#logout').addEventListener('click', logout);
+let logoutBtn = document.getElementById('logout');
+if (logoutBtn) {
+document.querySelector('#logout').addEventListener('click', logout);}

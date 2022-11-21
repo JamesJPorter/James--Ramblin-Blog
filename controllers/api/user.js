@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
+
+//login
 router.post("/login", async (req, res) => {
   try {
     // Retrieve user from database based on username
@@ -35,18 +37,20 @@ router.post("/login", async (req, res) => {
   }
 });
 
+
+//create new user
 router.post('/register', async (req, res) => {
   try {
-    const dbUserData = await User.create({
+    const newUser = await User.create({
       username: req.body.username,
-      password: req.body.password,
+      password: req.body.password
     });
 
     // Set up sessions with a 'loggedIn' variable set to `true`
     req.session.save(() => {
-      req.session.loggedIn = true;
-
-      res.status(200).json(dbUserData);
+      req.session.loggedin = true;
+      console.log(newUser)
+      res.status(200).json(newUser);
     });
   } catch (err) {
     console.log(err);
@@ -54,9 +58,13 @@ router.post('/register', async (req, res) => {
   }
 });
 
+
+
+//logout
 router.post('/logout', (req, res) => {
   // When the user logs out, destroy the session
-  if (req.session.loggedIn) {
+  console.log("logout route")
+  if (req.session.loggedin) {
     req.session.destroy(() => {
       res.status(204).end();
     });
