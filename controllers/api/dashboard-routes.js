@@ -2,19 +2,15 @@ const router = require('express').Router();
 const { Post } = require('../../models')
 
 //create new post
-router.post('/dashboard', async (req, res) => {
+router.post('/createpost', async (req, res) => {
     try {
+        console.log("req.body title & content", req.body.postTitle, res.body.postTitle)
       const newPost = await Post.create({
-        post_name: req.body.username,
-        post_content: req.body.password
+        post_name: req.body.postTitle,
+        post_content: req.body.postContent
       });
-  
-      // Set up sessions with a 'loggedIn' variable set to `true`
-      req.session.save(() => {
-        req.session.loggedin = true;
-        console.log(newUser)
-        res.status(200).json(newUser);
-      });
+      console.log(newPost)
+      console.log('req.body', req.body.postTitle, req.body.postContent)
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
