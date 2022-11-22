@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
 
         //serialize data retrieved
         const posts = dbPostData.map((post) => post.get({plain: true}));
+        console.log("req.session", req.session)
         //respond with template to render along with data retrieved
         res.render('homepage', {posts, loggedin: req.session.loggedin});
     } catch (error) {
@@ -27,7 +28,7 @@ router.get('/post/:id', async (req, res) => {
 //  TODO: Login 
 router.get('/login', async (req, res) => {
     try {
-        if (req.session.logged_in) {
+        if (req.session.loggedin) {
             res.redirect('/');
           }
         res.render('login')
@@ -37,7 +38,7 @@ router.get('/login', async (req, res) => {
 });
 
 router.post('/logout', async (req, res) => {
-    if (req.session.logged_in) {
+    if (req.session.loggedin) {
         // Remove the session variables
         req.session.destroy(() => {
           res.status(204).end();
@@ -52,6 +53,10 @@ router.post('/logout', async (req, res) => {
 router.get('/register', async (req, res) => {
     res.render('register');
 });
+
+router.get('/dashboard', async (req, res) => {
+    res.render('dashboard')
+})
 
 
 module.exports = router;
