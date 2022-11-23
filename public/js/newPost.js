@@ -24,6 +24,6 @@ const newPost = async (event) => {
 let submitBtn = document.querySelector('.createBtn');
 
 if (submitBtn){
-  document.querySelector(".createBtn").addEventListener("submit", newPost)
+  document.querySelector("form").addEventListener("submit", newPost)
 };
 

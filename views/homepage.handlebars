@@ -9,11 +9,11 @@
   <div class="card-body">
     <h5 class="card-title">{{this.post_name}}</h5>
     <p class="card-text">{{this.post_name}}</p>
-    {{#if loggedin}}
-    <div class="input-group">
-    <span class="input-group-text">Write Comment</span>
-    <textarea type="text" class="userComment form-control" aria-label="write comment">
-    </div>
+    {{#if ../loggedin}}
+      <div class="form-floating">
+        <textarea class="form-control"></textarea>
+        <label for="floatingTextarea">Leave a comment here</label>
+      </div>
     {{else}}
     <a class="btn btn-primary" href="./login">Login to Comment</a>
     {{/if}}
