@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 
 //  TODO: Get All Posts 
 router.get('/', async (req, res) => {
@@ -23,7 +23,20 @@ router.get('/', async (req, res) => {
 
 //  TODO: Get single Posts 
 router.get('/post/:id', async (req, res) => {
-    res.send(`Render single post view along with the post with id ${req.params.id} retrieved from the db.`)
+    console.log(req.params.id)
+    try {
+        const postDetail = await Post.findbyPk(req.params.id)
+        if (postDetail) {
+            const serialPost = postDetail.get({plain: true})
+            console.log(serialPost)
+            res.render('postDetails', {serialPost})
+        }else {
+            res.status(404).end()
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
 });
 
 //  TODO: Login 
@@ -58,6 +71,7 @@ router.get('/register', async (req, res) => {
 router.get('/dashboard', async (req, res) => {
     res.render('dashboard')
 })
+
 
 
 module.exports = router;
