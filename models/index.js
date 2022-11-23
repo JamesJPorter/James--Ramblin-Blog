@@ -23,5 +23,9 @@ Comment.hasOne(Post, {
     foreignKey: 'post_id'
 });
 
+Comment.hasOne(User, {
+    foreignKey: 'user_id'
+});
+
 module.exports = { User, Post, Comment};
 

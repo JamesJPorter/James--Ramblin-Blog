@@ -33,6 +33,9 @@ Post.init(
     freezeTableName: true,
     underscored: true,
     modelName: "post",
+    timestamps: true, 
+    createdAt: true,
+    updatedAt: true
   }
 );
 

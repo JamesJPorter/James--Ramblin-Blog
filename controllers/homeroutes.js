@@ -7,11 +7,12 @@ router.get('/', async (req, res) => {
     try {
         //retrieve all posts from db
         const dbPostData = await Post.findAll({
-            include: [User],
+            include: [User]
         });
 
         //serialize data retrieved
         const posts = dbPostData.map((post) => post.get({plain: true}));
+        // console.log(posts)
         console.log("req.session", req.session)
         //respond with template to render along with data retrieved
         res.render('homepage', {posts, loggedin: req.session.loggedin});

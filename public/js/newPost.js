@@ -1,10 +1,9 @@
 const newPost = async (event) => {
     event.preventDefault();
-    console.log(submitBtn)
     const newPostTitle = document.querySelector("#postTitle").value.trim();
     const newPostContent = document.querySelector("#postContent").value.trim();
 
-    console.log(newPostTitle, newPostContent)
+    console.log("new post data test", newPostTitle, newPostContent)
 
     if (newPostTitle && newPostContent) {
         const response = await fetch("/api/dashboard/createpost", {
@@ -12,18 +11,13 @@ const newPost = async (event) => {
           body: JSON.stringify({ newPostTitle, newPostContent }),
           headers: { "Content-Type": "application/json" },
         });
-    
-        if (response.ok) {
-          document.location.replace("/");
-        } else {
-          alert("Failed to create post");
-        }
+        console.log(response)
+        response.ok ? document.location.replace('./') : alert('Failed to create post');
       }
 };
 
-let submitBtn = document.querySelector('.createBtn');
+let createBtn = document.querySelector('.createBtn');
 
-if (submitBtn){
-  document.querySelector("form").addEventListener("submit", newPost)
-};
+document.querySelector("form").addEventListener("submit", newPost);
+
 

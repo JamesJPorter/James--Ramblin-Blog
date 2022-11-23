@@ -1,8 +1,8 @@
 {{> nav}}
 
-<h1>Welcome to James' Ramblin Room!</h1>
+<h1 class="ms-4">Welcome to James' Ramblin Room!</h1>
 {{#each posts}}
-<div class="card container justify-content-center mt-4 mb-4">
+<div class="card container justify-content-center mt-4 mb-4" data-id="{{this.id}}">
   <div class="card-header">
     {{this.user}}
   </div>
@@ -10,13 +10,17 @@
     <h5 class="card-title">{{this.post_name}}</h5>
     <p class="card-text">{{this.post_name}}</p>
     {{#if ../loggedin}}
+    <form>
       <div class="form-floating">
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control newComment"></textarea>
         <label for="floatingTextarea">Leave a comment here</label>
+        <button type="submit" class="btn btn-primary commentBtn mt-3">Comment</button>
       </div>
+    </form>
     {{else}}
     <a class="btn btn-primary" href="./login">Login to Comment</a>
     {{/if}}
+    <p class="card-text">{{../comment_text}}</p>
   </div>
 </div>
 {{/each}}

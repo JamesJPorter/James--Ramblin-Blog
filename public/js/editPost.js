@@ -1,3 +1,0 @@
-const editPost = async (event) => {
-    
-}
