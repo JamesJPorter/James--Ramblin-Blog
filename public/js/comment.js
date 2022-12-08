@@ -3,6 +3,8 @@ const addComment = async (event) => {
     const newComment = document.querySelector(".newComment").value.trim();
     
     const postId = document.querySelector(`${this.data-id}`)
+
+    console.log(postId)
   
 
     console.log("newComment + postId", newComment, postId)

@@ -21,24 +21,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-//  TODO: Get single Posts 
-router.get('/post/:id', async (req, res) => {
-    console.log(req.params.id)
-    try {
-        const postDetail = await Post.findbyPk(req.params.id)
-        if (postDetail) {
-            const serialPost = postDetail.get({plain: true})
-            console.log(serialPost)
-            res.render('postDetails', {serialPost})
-        }else {
-            res.status(404).end()
-        }
-    } catch (err) {
-        console.log(err)
-        res.status(500).json(err)
-    }
-});
-
 //  TODO: Login 
 router.get('/login', async (req, res) => {
     try {

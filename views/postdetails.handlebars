@@ -1,11 +1,12 @@
+{{> nav}}
 
-<div class="card container justify-content-center mt-4 mb-4" data-id="{{this.id}}">
+<div class="card container justify-content-center mt-4 mb-4" data-id="{{post.id}}">
   <div class="card-header">
-    {{this.user}}
+    {{post.user}}
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{this.post_name}}</h5>
-    <p class="card-text">{{this.post_name}}</p>
+    <h5 class="card-title">{{post.post_name}}</h5>
+    <p class="card-text">{{post.post_content}}</p>
     
     <a class="btn btn-primary" href="./comment">Comment</a>
   </div>
