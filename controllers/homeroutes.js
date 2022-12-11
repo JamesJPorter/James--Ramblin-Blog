@@ -21,12 +21,13 @@ router.get('/', async (req, res) => {
     }
 });
 
+
 //  TODO: Login 
 router.get('/login', async (req, res) => {
     try {
         if (req.session.loggedin) {
             res.redirect('/');
-          }
+        }
         res.render('login')
     }catch (err){
         res.status(400).json(err)
@@ -37,12 +38,12 @@ router.post('/logout', async (req, res) => {
     if (req.session.loggedin) {
         // Remove the session variables
         req.session.destroy(() => {
-          res.status(204).end();
-          res.redirect('/');
+            res.status(204).end();
+            res.redirect('/');
         });
-      } else {
+    } else {
         res.status(404).end();
-      }
+    }
 });
 
 //  TODO: Signup 
@@ -53,6 +54,30 @@ router.get('/register', async (req, res) => {
 router.get('/dashboard', async (req, res) => {
     res.render('dashboard')
 })
+
+router.get('/:id', async (req, res) => {
+    console.log("req.params.id", req.params.id)
+    try {
+        const postDetail = await Post.findOne({
+            where: {id: req.params.id}, 
+            include: [
+                {
+                  model: User, Comment
+                }
+              ],
+        })
+            console.log("postDetail", postDetail)
+            const serialPost = postDetail.get({plain: true})
+            console.log("serialPost", serialPost)
+            res.render('postdetails', {
+               layout: 'main',
+               serialPost
+            });
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+});
 
 
 

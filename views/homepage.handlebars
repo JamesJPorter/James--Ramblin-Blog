@@ -10,9 +10,9 @@
     <h5 class="card-title">{{this.post_name}}</h5>
     <p class="card-text">{{this.post_content}}</p>
     {{#if ../loggedin}}
-    <a class="btn btn-primary detailsBtn" href="/postRoutes/:{{this.id}}" data-id="{{this.id}}">Details</a>
+    <a class="btn btn-primary detailsBtn" href="/{{this.id}}" data-id="{{this.id}}">Details</a>
     {{else}}
-    <a class="btn btn-primary" href="./login" data-id="{{this.id}}">Login to Comment</a>
+    <a class="btn btn-primary" href="/login" data-id="{{this.id}}">Login to Comment</a>
     {{/if}}
     <p class="card-text">{{../comment_text}}</p>
   </div>

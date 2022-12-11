@@ -1,25 +1,26 @@
+let commentBtn = document.querySelector('#commentBtn');
 const addComment = async (event) => {
     event.preventDefault();
-    const newComment = document.querySelector(".newComment").value.trim();
+    const commentContent = document.querySelector("#commentContent").value.trim();
+
+    console.log("commentContent", commentContent)
     
-    const postId = document.querySelector(`${this.data-id}`)
+    let postId = commentBtn.getAttribute('data-id');
 
-    console.log(postId)
-  
+    console.log(postId);
 
-    console.log("newComment + postId", newComment, postId)
+    console.log("commentContent + postId + userName", commentContent, postId);
 
-    if (newComment) {
-        const response = await fetch("/api/dashboard/comment", {
+    if (commentContent) {
+        const response = await fetch("/api/comment", {
           method: "POST",
-          body: JSON.stringify({ newComment, postId }),
+          body: JSON.stringify({ commentContent, postId }),
           headers: { "Content-Type": "application/json" },
         });
         console.log(response)
-        response.ok ? document.location.replace('./') : alert('Failed to create post');
+        response.ok ? document.location.replace('./') : alert('Failed to create comment');
       }
 };
 
-let createBtn = document.querySelector('.commentBtn');
 
-document.querySelector(".commentBtn").addEventListener("click", addComment);
+document.querySelector("#commentBtn").addEventListener("click", addComment);

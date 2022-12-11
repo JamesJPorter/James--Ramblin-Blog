@@ -1,22 +1,33 @@
 {{> nav}}
 
-<div class="card container justify-content-center mt-4 mb-4" data-id="{{post.id}}">
+<div class="card container justify-content-center mt-4 mb-4" data-id="{{serialPost.id}}">
   <div class="card-header">
-    {{post.user}}
+    {{serialPost.user_id}}
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{post.post_name}}</h5>
-    <p class="card-text">{{post.post_content}}</p>
-    
-    <a class="btn btn-primary" href="./comment">Comment</a>
+    <h5 class="card-title">{{serialPost.post_name}}</h5>
+    <p class="card-text">{{serialPost.post_content}}</p>
   </div>
+  <div class="mb-3">
+  <label for="commentContent" class="form-label">Your Comment Here</label>
+  <textarea class="form-control" id="commentContent" rows="3"></textarea>
+  <button class="btn btn-primary mt-3 ms-2" id="commentBtn" data-id="{{serialPost.id}}">Comment</button>
+</div>
 </div>
 
-   <div class="mb-3">
+{{!-- {{#each comment}}
+<div class="card container justify-content-center mt-4 mb-4" data-id="{{comment.id}}">
+  <div class="card-header">
+    {{serialPost.user_id}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{serialPost.post_name}}</h5>
+    <p class="card-text">{{serialPost.post_content}}</p>
+  </div>
+  <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Your Comment Here</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <textarea class="form-control commentContent" id="" rows="3"></textarea>
+  <button class="btn btn-primary mt-3 ms-2" id="commentBtn" data-id="{{post.id}}">Comment</button>
 </div>
-
-{{#each comment}}
-
-{{/each}}
+</div>
+{{/each}} --}}
