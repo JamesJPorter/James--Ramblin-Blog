@@ -3,7 +3,7 @@ const { User, Post, Comment } = require('../models');
 
 //  TODO: Get All Posts 
 router.get('/', async (req, res) => {
-    // console.log('*******', req.session)
+    console.log('*******', req.session)
     try {
         //retrieve all posts from db
         const dbPostData = await Post.findAll({
@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
         res.status(500).json(error);
     }
 });
-
 
 //  TODO: Login 
 router.get('/login', async (req, res) => {
@@ -67,7 +66,7 @@ router.get('/:id', async (req, res) => {
               ],
         })
             console.log("postDetail", postDetail)
-            const serialPost = postDetail.get({plain: true})
+            const serialPost = postDetail.get({ plain: true })
             console.log("serialPost", serialPost)
             res.render('postdetails', {
                layout: 'main',
